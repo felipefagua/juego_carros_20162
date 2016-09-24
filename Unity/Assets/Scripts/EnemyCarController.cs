@@ -1,31 +1,55 @@
 ﻿using UnityEngine;
+
 using System.Collections;
 
+
 public class EnemyCarController : MonoBehaviour {
-	public float  Speed;
-	public Vector3 Direction;
 
-	public float LifeTime = 0;
+	
+public Vector3 _direction;
+	
+public float _speed;
+		
+public float _lifeTime;
+
+	
 	// Use this for initialization
-	void Start () {
-		Invoke ( "Sleep",LifeTime);  
+	
+	void OnEnable () {
+		
+		Invoke ("GotoSleep", _lifeTime);
+	
 	}
 
-
-	public void Sleep(){
-		gameObject.SetActive(false);
+	
+	public void GotoSleep(){
+		
+		gameObject.SetActive (false);	
+	
 	}
+
 	
 	// Update is called once per frame
-	void Update () {
-		move ();
+	
+ 	void Update () {
+		
+       moveCar();
+
 	}
-	public void move(){
-		Vector3 step = Direction.normalized * Speed * Time.deltaTime;
-		transform.Translate (step);
+
+
+
+  	private void moveCar(){
+
+		Vector3 step = _direction.normalized * _speed * Time.deltaTime;
+		transform.Translate(step);
+
 	}
 
 
+	public void OnDisable(){
 
+		CancelInvoke ();
+	}
 
 }
