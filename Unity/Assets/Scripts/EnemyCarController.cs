@@ -4,13 +4,16 @@ using System.Collections;
 
 
 public class EnemyCarController : MonoBehaviour {
-
-	
-public Vector3 _direction;
-	
-public float _speed;
 		
-public float _lifeTime;
+	public float _lifeTime;
+	PlayerCarController Play;
+	Comand UpComand;
+
+
+	void Start (){
+		UpComand = new UpComand();
+		Play = this.gameObject.GetComponent<PlayerCarController> ();
+	}
 
 	
 	// Use this for initialization
@@ -32,19 +35,15 @@ public float _lifeTime;
 	// Update is called once per frame
 	
  	void Update () {
-		
-       moveCar();
+		TruckCar();
 
 	}
 
-
-
-  	private void moveCar(){
-
-		Vector3 step = _direction.normalized * _speed * Time.deltaTime;
-		transform.Translate(step);
-
+	public void TruckCar(){
+		UpComand.execute(Play);
 	}
+
+  	
 
 
 	public void OnDisable(){
